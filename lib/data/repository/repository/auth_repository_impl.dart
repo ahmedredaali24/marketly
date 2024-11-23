@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 
-
 import '../../../domin/enitity/auth_result_Entity.dart';
 import '../../../domin/enitity/failures.dart';
 import '../../../domin/repository/data_source/auth_remote_date_source.dart';
@@ -21,5 +20,10 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
   Future<Either<Failures, AuthResultEntity>> login(
       String email, String password) {
     return remoteDateSource.login(email, password);
+  }
+
+  @override
+  Future registerByGoogle() {
+    return remoteDateSource.registerByGoogle();
   }
 }

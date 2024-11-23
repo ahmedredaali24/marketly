@@ -4,7 +4,6 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
 
-
 import '../../../domin/enitity/ProductResponseEntity.dart';
 import '../../utils/my_assets.dart';
 import '../../utils/my_colors.dart';

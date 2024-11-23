@@ -51,6 +51,10 @@ dependencies:
   flutter_image_slideshow: ^0.1.6
   readmore: ^3.0.0
   dartz: ^0.10.1
+  dio: ^5.7.0
+  firebase_core: ^3.8.0
+  google_sign_in: ^6.2.2
+  firebase_auth: ^5.3.3
 
 
 
@@ -109,10 +113,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: marketly_font
+      fonts:
+        - asset: assets/fonts/marketly_font.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

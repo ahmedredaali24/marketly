@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,13 +14,16 @@ import 'cubit/home_tab_view_model.dart';
 class HomeTapView extends StatelessWidget {
   HomeTapView({super.key});
 
-  HomeTabViewModel viewModel =
-      HomeTabViewModel(categoriesUseCase: injectGetAllCategoriesUseCase(), brandesUseCase: injectGetAllBrandesUseCase());
+  final HomeTabViewModel viewModel = HomeTabViewModel(
+      categoriesUseCase: injectGetAllCategoriesUseCase(),
+      brandesUseCase: injectGetAllBrandesUseCase());
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeTabViewModel, HomeTabStates>(
-      bloc: viewModel..getAllCategories()..getAllBrandes(),
+      bloc: viewModel
+        ..getAllCategories()
+        ..getAllBrandes(),
       builder: (context, state) {
         return SafeArea(
           child: Padding(
@@ -33,9 +35,11 @@ class HomeTapView extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Image.asset(
-                    "assets/icons/route_logo.png",
-                    color: AppColors.primaryColor,
+                  Text(
+                    "Marketly",
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.primaryColor,
+                        fontFamily: "marketly_font"),
                   ),
                   SizedBox(
                     height: 18.h,
@@ -68,11 +72,15 @@ class HomeTapView extends StatelessWidget {
                   SizedBox(
                     height: 24.h,
                   ),
-                  state is CategoryOrBrandLoadingState?
-                  const Center(child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),):
-                  CategoriesOrBrandsSection(categoriesOrBrandsList:viewModel.brandesList ,),
+                  state is CategoryOrBrandLoadingState
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
+                        )
+                      : CategoriesOrBrandsSection(
+                          categoriesOrBrandsList: viewModel.brandesList,
+                        ),
                 ],
               ),
             ),

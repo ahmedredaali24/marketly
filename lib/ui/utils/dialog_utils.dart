@@ -17,8 +17,8 @@ class DialogUtils {
                 const CircularProgressIndicator(
                   color: AppColors.primaryColor,
                 ),
-                const SizedBox(
-                  width: 15,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * .015,
                 ),
                 Text(massage)
               ],

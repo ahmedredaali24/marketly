@@ -9,4 +9,6 @@ abstract class AuthRemoteDateSource{
 
   Future<Either<Failures,AuthResultEntity>> login(String email , String password);
 
+  Future registerByGoogle();
+
 }

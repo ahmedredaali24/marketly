@@ -10,5 +10,6 @@ abstract class AuthRepositoryContract{
       String rePassword, String phone);
 
   Future<Either<Failures,AuthResultEntity>> login(String email , String password);
+  Future registerByGoogle();
 
 }

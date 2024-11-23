@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,10 +12,14 @@ import 'package:marketly/ui/splash/splash_screen.dart';
 import 'package:marketly/ui/utils/my_theme.dart';
 import 'package:marketly/ui/utils/shared_pre.dart';
 
+import 'firebase_options.dart';
 import 'my_bloc_abserver.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await SharedPre.init();
   String route;
   var user = SharedPre.getDate(key: "Token");
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: route,
+        initialRoute: LoginScreen.routeName,
         routes: {
           SplashScreen.routeName: (context) => SplashScreen(),
           RegisterScreen.routeName: (context) => RegisterScreen(),

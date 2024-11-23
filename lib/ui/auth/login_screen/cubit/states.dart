@@ -18,3 +18,5 @@ class LoginSuccessState extends LoginStates {
 
   LoginSuccessState({required this.authResultEntity});
 }
+
+class LoginIsObscureState extends LoginStates {}

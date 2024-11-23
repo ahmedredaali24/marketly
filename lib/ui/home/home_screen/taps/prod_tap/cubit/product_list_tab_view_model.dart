@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketly/ui/home/home_screen/taps/prod_tap/cubit/product_list_tab_states.dart';
 
@@ -13,13 +12,16 @@ class ProductListTabViewModel extends Cubit<ProductListTabStates> {
   FavoriteUseCase favoriteUseCase;
 
   ProductListTabViewModel(
-      {required this.getAllProductUseCase, required this.addCartUseCase,required this.favoriteUseCase})
+      {required this.getAllProductUseCase,
+      required this.addCartUseCase,
+      required this.favoriteUseCase})
       : super(ProductListTabInitialState());
 
   List<ProductEntity> productList = [];
   int numOfCartItem = 0;
 
-  static ProductListTabViewModel get(context)=>BlocProvider.of(context);
+  static ProductListTabViewModel get(context) => BlocProvider.of(context);
+
   Future<void> getProducts() async {
     emit(ProductListTabLoadingState(loadingMessage: "Loading..."));
     var either = await getAllProductUseCase.invoke();
@@ -38,6 +40,7 @@ class ProductListTabViewModel extends Cubit<ProductListTabStates> {
       emit(AddToCartSuccessState(addCartResponseEntity: r));
     });
   }
+
   Future<void> addToFavorite(String productId) async {
     emit(AddToFavoriteLoadingState(loadingMessage: "Loading..."));
     var either = await favoriteUseCase.invoke(productId);
@@ -46,4 +49,5 @@ class ProductListTabViewModel extends Cubit<ProductListTabStates> {
       print("numOfCartItem:$numOfCartItem");
       emit(AddToFavoriteSuccessState(favoriteResponseEntity: r));
     });
-}}
+  }
+}

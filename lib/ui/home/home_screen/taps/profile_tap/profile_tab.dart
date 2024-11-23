@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +14,8 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-  ProfileTabViewModel viewModel=ProfileTabViewModel();
+  ProfileTabViewModel viewModel = ProfileTabViewModel();
+
   @override
   void initState() {
     super.initState();
@@ -40,9 +40,11 @@ class _ProfileTabState extends State<ProfileTab> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          "assets/icons/route_logo.png",
-                          color: AppColors.primaryColor,
+                        Text(
+                          "Marketly",
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: AppColors.primaryColor,
+                              fontFamily: "marketly_font"),
                         ),
                         IconButton(
                             onPressed: () {

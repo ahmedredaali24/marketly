@@ -18,4 +18,4 @@ class RegisterSuccessState extends RegisterStates {
 
   RegisterSuccessState({required this.authResultEntity});
 }
-
+class RegisterIsObscureReState extends RegisterStates {}

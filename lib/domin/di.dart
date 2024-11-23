@@ -1,5 +1,3 @@
-
-
 import 'package:marketly/domin/repository/data_source/add_cart_date_source.dart';
 import 'package:marketly/domin/repository/data_source/add_fav_remote_data_source.dart';
 import 'package:marketly/domin/repository/data_source/auth_remote_date_source.dart';
@@ -23,6 +21,7 @@ import 'package:marketly/domin/use_cases/get_all_brandes_use_case.dart';
 import 'package:marketly/domin/use_cases/get_all_categories_use_case.dart';
 import 'package:marketly/domin/use_cases/get_all_product_use_case.dart';
 import 'package:marketly/domin/use_cases/get_favorite_use_case.dart';
+import 'package:marketly/domin/use_cases/google_register_use_case.dart';
 import 'package:marketly/domin/use_cases/login_use_case.dart';
 import 'package:marketly/domin/use_cases/register_use_case.dart';
 import 'package:marketly/domin/use_cases/update_cart_use_case.dart';
@@ -160,4 +159,8 @@ CartRepo injectCartRepo() {
 CartRemoteDataSource injectCartRemoteDataSource() {
   return GetCartRemoteDataSourceImpl(
       cartApiManger: GetCartApiManger.getInstance());
+}
+
+GoogleRegisterUseCase injectGoogleRegisterUseCase() {
+  return GoogleRegisterUseCase(authRepository: injectAuthRepositoryContract());
 }

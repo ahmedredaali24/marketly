@@ -6,11 +6,12 @@
 
 class RegisterRequest {
   RegisterRequest({
-      this.name,
-      this.email,
-      this.password,
-      this.rePassword,
-      this.phone,});
+    this.name,
+    this.email,
+    this.password,
+    this.rePassword,
+    this.phone,
+  });
 
   RegisterRequest.fromJson(dynamic json) {
     name = json['name'];
@@ -19,6 +20,7 @@ class RegisterRequest {
     rePassword = json['rePassword'];
     phone = json['phone'];
   }
+
   String? name;
   String? email;
   String? password;
@@ -34,5 +36,4 @@ class RegisterRequest {
     map['phone'] = phone;
     return map;
   }
-
 }

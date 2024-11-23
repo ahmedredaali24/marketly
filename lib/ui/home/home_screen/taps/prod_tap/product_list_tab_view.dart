@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,94 +15,96 @@ import 'cubit/product_list_tab_view_model.dart';
 class ProductListTabView extends StatelessWidget {
   ProductListTabView({super.key});
 
-  ProductListTabViewModel viewModel = ProductListTabViewModel(favoriteUseCase: injectFavoriteUseCase(),
+final  ProductListTabViewModel viewModel = ProductListTabViewModel(
+      favoriteUseCase: injectFavoriteUseCase(),
       addCartUseCase: injectAddCartUseCase(),
       getAllProductUseCase: injectGetAllProductUseCase());
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductListTabViewModel>(
-      create: (context)=>viewModel..getProducts(),
+      create: (context) => viewModel..getProducts(),
       child: BlocBuilder<ProductListTabViewModel, ProductListTabStates>(
           builder: (context, state) {
-            return SafeArea(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 17.w),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Image.asset(
-                        "assets/icons/route_logo.png",
+        return SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 17.w),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    "Marketly",
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppColors.primaryColor,
-                      ),
-                      SizedBox(
-                        height: 18.h,
-                      ),
-                      Row(children: [
-                        Expanded(
-                          child: CustomTextField(),
+                        fontFamily: "marketly_font"),
+                  ),
+                  SizedBox(
+                    height: 18.h,
+                  ),
+                  Row(children: [
+                    Expanded(
+                      child: CustomTextField(),
+                    ),
+                    SizedBox(
+                      width: 24.w,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                      },
+                      child: Badge(
+                        label: Text(viewModel.numOfCartItem.toString()),
+                        child: ImageIcon(
+                          const AssetImage(MyAssets.shoppingCart),
+                          size: 28.sp,
+                          color: AppColors.primaryColor,
                         ),
-                        SizedBox(
-                          width: 24.w,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pushNamed(CartScreen.routeName);
-                          },
-                          child: Badge(
-                            label: Text(viewModel.numOfCartItem.toString()),
-                            child: ImageIcon(
-                              const AssetImage(MyAssets.shoppingCart),
-                              size: 28.sp,
-                              color: AppColors.primaryColor,
-                            ),
+                      ),
+                    ),
+                  ]),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  state is ProductListTabLoadingState
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
                           ),
-                        ),
-                      ]),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      state is ProductListTabLoadingState
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primaryColor,
-                              ),
-                            )
-                          : Expanded(
-                              child: GridView.builder(
-                                itemCount: viewModel.productList.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: (2 / 2.4),
-                                        crossAxisSpacing: 16.w,
-                                        mainAxisSpacing: 16.h),
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    splashColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () {
-                                      Navigator.of(context).pushNamed(
-                                          ProductDetailsView.routeName,
-                                          arguments:
-                                              viewModel.productList[index]);
-                                    },
-                                    child: GridViewCardItem(
-                                      productEntity: viewModel.productList[index],
-                                    ),
-                                  );
+                        )
+                      : Expanded(
+                          child: GridView.builder(
+                            itemCount: viewModel.productList.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: (2 / 2.4),
+                                    crossAxisSpacing: 16.w,
+                                    mainAxisSpacing: 16.h),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      ProductDetailsView.routeName,
+                                      arguments: viewModel.productList[index]);
                                 },
-                              ),
-                            )
-                    ]),
-              ),
-            );
-          }),
+                                child: GridViewCardItem(
+                                  productEntity: viewModel.productList[index],
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                ]),
+          ),
+        );
+      }),
     );
   }
 }
